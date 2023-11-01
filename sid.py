@@ -18,7 +18,7 @@ tfd = tfp.distributions
 from cleanfid.utils import *
 from cleanfid.features import *
 from cleanfid.resize import *
-from cleanfid import fid
+# from cleanfid import fid
 
 
 from absl import app
@@ -458,7 +458,7 @@ if __name__ == '__main__':
         log_dir = FLAGS_dict['log_folder']
     
     if log_dir[-1] != '/':
-        log_dir += '/' 
+        log_dir += '/'
 
     if FLAGS_dict['resume']:     
         run_loc = log_dir + FLAGS_dict['run_id']
@@ -467,17 +467,17 @@ if __name__ == '__main__':
         print("No RunID specified. Logs will be saved in a folder based on FLAGS")  
         today = date.today()
         d1 = today.strftime("%d%m%Y")
-        run_id = d1 +'_sid_data_' + FLAGS_dict['data']+ '_noise_' + FLAGS_dict['noise'] + '_' + FLAGS_dict['model'] + '_order_' + str(FLAGS_dict['order']).replace('-','m')
+        run_id = d1 +'_sid_data_' + FLAGS_dict['data']+ '_noise_' + FLAGS_dict['noise'] + '_' + FLAGS_dict['model'] + \
+                 '_order_' + str(FLAGS_dict['order']).replace('-','m')
         # self.run_id = d1 +'_'+ self.topic + '_' + self.data + '_' + self.gan + '_' + self.loss
         run_loc = log_dir + run_id
 
         runs = sorted(glob(run_loc+'*/'))
-        print(runs)
         if len(runs) == 0:
             curnum = 0
         else:
+            runs = [path.replace("\\", "/") for path in runs]
             curnum = int(runs[-1].split('_')[-1].split('/')[0])
-        print(curnum)
         if FLAGS_dict['run_id'] == 'new':
             curnum = curnum+1
         else:
@@ -490,7 +490,7 @@ if __name__ == '__main__':
 
 
     ''' Create for/ Create base logs folder'''
-    pwd = os.popen('pwd').read().strip('\n')
+    pwd = "C:/Users/rdede/Documents/GitHub/GANs_with_SID/SID"
     if not os.path.exists(pwd+'/logs'):
         os.mkdir(pwd+'/logs')
 
