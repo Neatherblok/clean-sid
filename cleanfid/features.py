@@ -38,7 +38,7 @@ def build_feature_extractor(mode, device=torch.device("cuda")):
     elif mode=="legacy_tensorflow":
         feat_model = feature_extractor(name="torchscript_inception", resize_inside=True, device=device)
     elif mode=="clean":
-        feat_model = feature_extractor(name="torchscript_inception", resize_inside=False, device=device)
+        feat_model = feature_extractor(name="pytorch_inception", resize_inside=False, device=device)
     return feat_model
 
 

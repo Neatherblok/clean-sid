@@ -20,11 +20,11 @@ class ResizeDataset(torch.utils.data.Dataset):
     fn_resize: function that takes an np_array as input [0,255]
     """
 
-    def __init__(self, files, mode, size=(299, 299)):
+    def __init__(self, files, mode, size=(255, 255)):
         self.files = files
         self.transforms = torchvision.transforms.ToTensor()
         self.size = size
-        self.fn_resize = build_resizer(mode)
+        #self.fn_resize = build_resizer(mode)
 
 
     def __len__(self):
@@ -39,7 +39,8 @@ class ResizeDataset(torch.utils.data.Dataset):
             img_np = np.array(img_pil)
 
         # fn_resize expects a np array and returns a np array
-        img_resized = self.fn_resize(img_np)
+        img_resized = img_np
+        #img_resized = self.fn_resize(img_np)
 
         # ToTensor() converts to [0,1] only if input in uint8
         if img_resized.dtype == "uint8":

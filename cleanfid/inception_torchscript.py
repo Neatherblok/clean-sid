@@ -48,7 +48,7 @@ class InceptionV3W(nn.Module):
                 features = self.base(x, return_features=True).view((bs, 2048))
             else:
                 # make sure it is resized already
-                assert (x.shape[2] == 299) and (x.shape[3] == 299)
+                assert (x.shape[2] == 256) and (x.shape[3] == 256)
                 # apply normalization
                 x1 = x - 128
                 x2 = x1 / 128
